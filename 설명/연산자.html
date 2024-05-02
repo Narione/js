@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>연산자</title>
+  </head>
+  <body>
+    <script>
+      /* x&&y: x가 true면 y를 반환, x가 false면 x를 반환 */
+      /* x||y: x가 true면 x를 반환, x가 false면 y를 반환 */
+      console.log("" && "문자열");
+      console.log(undefined || "문자열");
+
+      //   const [state, setState] = useState(list || "초깃값");
+      //     const arr = null;
+      //     arr&&arr.map((v)=>{});
+
+      /* 삼항연산자: 조건? 참 : 거짓 */
+      let score = 90;
+      console.log(score >= 90 ? "A+" : "B");
+      //중첨삼항연산자
+      score >= 90 ? "A" : score >= 80 ? "B" : "C";
+    </script>
+  </body>
+</html>
