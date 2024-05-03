@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>전개구문</title>
+  </head>
+  <body>
+    <script>
+      /* 전개구문: 배열처럼 값이 다양한 자료(객체)를 한꺼번에 인수로 넘겨줄때
+                    배열과 배열을 하나의 덩어리로 합칠 때
+         */
+      const arr = ["사과", "바나나", "복숭아"];
+      console.log(arr);
+      console.log(...arr);
+
+      //   const arr2 = ["메론", "수박"];
+      //   console.log([...arr, ...arr2]);
+
+      const obj = { name: "신짱구" };
+      const obj2 = { age: 5 };
+      //   console.log(...obj);
+      console.log({ ...obj, ...obj2 });
+
+      const addNum = (p1, p2) => {
+        console.log(p1 + p2);
+      };
+      addNum(1, 2);
+      addNum(1, 2, 3, 4);
+
+      /* 나머지 매개 변수 */
+      const addNum2 = (...param) => {
+        console.log(param);
+        let sum = 0;
+        for (item of param) {
+          sum += item;
+        }
+      };
+
+      addNum2(1, 2);
+      addNum2(1, 2, 3, 4);
+
+      const arr1 = [10, 20, 30, 40, 50];
+      const arr2 = [20, 30, 40, 50, 60];
+      const num1 = 10;
+      const num2 = 20;
+      //함수를 하나 정의내리고 그 함수의 인수로 위의 3가지
+      //변수를 모두 넘겨서 가장 큰 숫자 하나를 콘솔에 출력
+
+      const maxNum = (...param) => {
+        let max = param[0];
+        for (item of param) {
+          if (item > max) {
+            max = item;
+          }
+        }
+        console.log(max);
+      };
+      maxNum(...arr1, ...arr2, num1, num2);
+      console.log(...arr1, ...arr2, num1, num2);
+    </script>
+  </body>
+</html>
