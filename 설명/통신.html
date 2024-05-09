@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>통신</title>
+    <!--axios cdn링크 추가-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <script>
+      /* http통신: ajax(fetch api, axios)
+            AJAX: 웹페이지 내에서 동적으로 데이터를 주고 받는 기술
+            - XML, JSON
+
+            JSON: 통신을 할 때의 데이터 타입 != js 객체 리터럴
+            **  json은 언어, 툴 상관 없음
+
+            get 방식: 주소창 url, form태그 action='/' method='post'
+            www.naver.com/page2?name='ddd'&age=5
+        */
+      /* fetch api */
+      const serviceKey =
+        "DfUnBEe9np3eYiWp4Egg5yje0jnUV%2BVSXLBBcDGNW3t0DkcrbtnIdmoPly38qE5PAtW2FPbeIdXNHQ0T9bZuWw%3D%3D";
+      const url = `http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?serviceKey=${serviceKey}&numOfRows=10&pageNo=1&regId=11B00000&tmFc=202405081800&dataType=JSON`;
+      //백틱은 공백으로 인지 개행 안됨
+      const goFetch = () => {
+        // fetch 자동으로 get으로 요청해줌
+        const val = fetch(url)
+          .then((res) => {
+            if (!res.ok) {
+              // true , false
+              //서버에서 통신 에러
+              throw new Error("error");
+            }
+            //response.text(): 텍스트데이터 반환
+            //response.json(): json 데이터를 파싱하여 js객체로 반환
+            //response.blob(): 바이너리 데이터(그림, 음악)
+            return res.json();
+          })
+          .then((data) => {
+            // console.log(data);
+            const result = data.response.body.items.item[0];
+            return result;
+
+            //DB Insert Update
+          })
+          .catch((err) => {
+            console.log("에러");
+          });
+
+        // console.log(val);
+        return val;
+      };
+
+      const data = goFetch();
+      data.then(console.log);
+
+      /*axios 이것을 많이 쓴다! /  aync&await*/
+
+      const goFetch2 = async () => {
+        const res = await fetch(url);
+        if (!res.ok) {
+          throw new Error("에러");
+        }
+        const data = await res.json();
+        const weatherInfo = data.response.body.items.item[0];
+        return weatherInfo;
+      };
+      result = goFetch2();
+      result.then(console.log);
+      //   console.log(result);
+      //프로미스는 오류처리 잘 잡음, 로직이 복잡함.
+      //asyc, await 직관적, 에러체크 내가 잘 잡아야 함. 비동기관련임. 통신관련은 아님.
+
+      /*axios 통신을 도와주는 라이브러리설치해야 함*/
+      const goAxios = () => {
+        axios
+          .get(url)
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+      //   goAxios();
+
+      const goAxios2 = async () => {
+        const res = await axios.get(url);
+        if (res.status != 200) {
+          throw new Error("error");
+        }
+        console.log(res.data);
+      };
+      goAxios2();
+
+      //cors
+    </script>
+  </body>
+</html>

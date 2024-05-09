@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>동기와 비동기</title>
+  </head>
+  <body>
+    <script>
+      /*
+      function displayA() {
+        console.log("A");
+      }
+      //비동기처리: 순서 상관 없음
+      function displayB() {
+        setTimeout(() => console.log("B"), 5000);
+      }
+      function displayC() {
+        console.log("C");
+      }
+
+      displayA();
+      displayB();
+      displayC();
+      */
+
+      // 1. 콜백함수
+      // 단점: 콜백지옥
+      function displayA() {
+        console.log("A");
+      }
+      // setTimeout은 비동기처리
+      function displayB(callback) {
+        setTimeout(() => {
+          console.log("B");
+          callback();
+        }, 2000);
+      }
+
+      function displayC() {
+        console.log("C");
+      }
+
+      displayA();
+      displayB(displayC);
+    </script>
+  </body>
+</html>
