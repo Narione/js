@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이벤트</title>
+  </head>
+  <body>
+    <input id="username" type="text" />
+    <ul>
+      <li>목록1</li>
+      <li>목록2</li>
+      <li>목록3</li>
+    </ul>
+    <script>
+      /* event 객체: */
+
+      document
+        .querySelector("#username")
+        .addEventListener("change", (event) => {
+          console.log(event.target.value);
+        });
+
+      document.querySelector("ul").addEventListener("click", (e) => {
+        console.log(e.target);
+        e.target.style.backgroundColor = "pick";
+      });
+
+      //위와 동일
+      const liEls = document.querySelector("li");
+      liEls.forEach((ele) => {
+        ele.addEventListener("click", () => {
+          ele.style.backgroundColor = "pick";
+        });
+      });
+      //   const usernameOnChangeHandler = (event) => {
+      //     console.log(event);
+      //   };
+
+      // document.querySelector("#username").addEventListener("change",()=>{
+
+      // })
+
+      // document.querySelector("#username").onchange=()=>{
+
+      // }
+
+      // $("#username").click()
+      // $("#username").on({
+      //     click: ()=>{}
+      // })
+      // $("#username").on(()=>{
+
+      // })
+    </script>
+  </body>
+</html>
